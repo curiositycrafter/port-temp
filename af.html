@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name - Crewmate Coder</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=VT323:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg-cosmic: #000005;
+      --chamber-metal: #1f2833;
+      --neon-blue: #00d4ff;
+      --neon-green: #00ff85;
+      --neon-purple: #c200ff;
+      --neon-orange: #ff7b00;
+      --neon-yellow: #fffb00;
+      --neon-red: #ff004d;
+      --holo-glow: 0 0 20px #00d4ff, 0 0 40px #00ff85, 0 0 60px #c200ff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg-cosmic);
+      color: #fff;
+      font-family: 'VT323', monospace;
+      overflow: hidden;
+      height: 100vh;
+      cursor: none;
+      position: relative;
+    }
+
+    /* NOVEL DESIGN: INTERSTELLAR CREW CHAMBER */
+    .crew-chamber {
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(circle at center, rgba(0,212,255,0.05) 0%, transparent 60%),
+        radial-gradient(circle at 30% 70%, rgba(255,0,77,0.03) 0%, transparent 50%),
+        linear-gradient(135deg, var(--bg-cosmic) 0%, #0a0f1a 100%);
+      z-index: -2;
+    }
+
+    .chamber-nebula {
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at 40% 20%, rgba(0,212,255,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(194,0,255,0.08) 0%, transparent 50%);
+      animation: nebulaDrift 20s ease-in-out infinite alternate;
+      mix-blend-mode: screen;
+    }
+
+    @keyframes nebulaDrift {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.7; }
+      100% { transform: translate(20px, 30px) scale(1.05); opacity: 0.9; }
+    }
+
+    /* CENTRAL HOLO-PODIUM - FLOATING CREW INTERFACE */
+    .holo-podium {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) perspective(1000px) rotateX(15deg);
+      width: 80vw;
+      max-width: 850px;
+      height: 550px;
+      background: radial-gradient(circle at center, rgba(31,40,51,0.95) 0%, rgba(10,15,26,0.98) 100%);
+      border: 4px double var(--neon-blue);
+      border-radius: 50% / 10% 10% 50% 50%;
+      box-shadow: 
+        var(--holo-glow),
+        inset 0 0 60px rgba(0,0,0,0.9),
+        0 0 120px rgba(0,212,255,0.3);
+      padding: 50px 40px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transform-style: preserve-3d;
+    }
+
+    .podium-scan {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(0,212,255,0.2), transparent);
+      animation: podiumScan 3s linear infinite;
+    }
+
+    @keyframes podiumScan {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+
+    /* CREW IDENTITY HOLOGRAM */
+    .crew-hologram {
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-green) 50%, var(--neon-purple) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: var(--holo-glow);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      position: relative;
+      margin-bottom: 20px;
+      animation: hologramFlicker 4s ease-in-out infinite;
+    }
+
+    .crew-hologram::before {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, var(--neon-yellow), transparent);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: hologramWave 2s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes hologramFlicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.95; text-shadow: 0 0 30px #00ff85, 0 0 60px #c200ff; }
+    }
+
+    @keyframes hologramWave {
+      0% { transform: skewX(0deg); }
+      50% { transform: skewX(2deg); }
+      100% { transform: skewX(0deg); }
+    }
+
+    /* MISSION DIRECTIVE */
+    .mission-directive {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--neon-green);
+      text-shadow: 0 0 15px var(--neon-green), 0 0 30px var(--neon-green);
+      letter-spacing: 0.1em;
+      text-align: center;
+      animation: directiveBlink 5s ease-in-out infinite;
+    }
+
+    @keyframes directiveBlink {
+      0%, 90% { opacity: 1; }
+      95% { opacity: 0.5; }
+    }
+
+    /* ACTIVATION CONSOLE */
+    .activation-console {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 20px 45px;
+      background: linear-gradient(145deg, var(--neon-red), #ff3366);
+      border: 4px solid var(--neon-blue);
+      border-radius: 15px;
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: none;
+      box-shadow: 
+        0 0 25px var(--neon-blue),
+        inset 0 0 15px rgba(255,255,255,0.3);
+      transition: all 0.35s ease;
+      overflow: hidden;
+    }
+
+    .activation-console::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+      transform: translateX(-150%);
+      transition: transform 0.6s;
+    }
+
+    .activation-console:hover {
+      transform: translateX(-50%) scale(1.07);
+      background: linear-gradient(145deg, var(--neon-yellow), #ffff66);
+      border-color: var(--neon-green);
+      box-shadow: 
+        0 0 40px var(--neon-green),
+        0 0 70px var(--neon-yellow);
+      color: #000;
+    }
+
+    .activation-console:hover::before {
+      transform: translateX(150%);
+    }
+
+    /* TASK HOLOGRAMS */
+    .task-hologram {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 240px;
+      padding: 20px;
+      background: rgba(31,40,51,0.9);
+      border: 3px solid var(--neon-purple);
+      border-radius: 15px;
+      color: var(--neon-green);
+      font-size: 1.1rem;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.4s ease;
+      box-shadow: 0 0 30px var(--neon-purple);
+      z-index: 15;
+    }
+
+    .task-hologram.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* VENT PORTAL */
+    .vent-portal {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      width: 110px;
+      height: 40px;
+      background: linear-gradient(90deg, #1f2833, #0f1419, #1f2833);
+      border: 3px solid var(--neon-blue);
+      border-radius: 20px 20px 8px 8px;
+      opacity: 0;
+      transition: all 0.4s ease;
+      cursor: none;
+      box-shadow: 0 0 25px var(--neon-blue);
+      z-index: 15;
+    }
+
+    .vent-portal.active {
+      opacity: 1;
+    }
+
+    /* WIRING NEXUS */
+    .wiring-nexus {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      width: 130px;
+      height: 85px;
+      background: rgba(31,40,51,0.9);
+      border: 3px solid var(--neon-orange);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--neon-orange);
+      text-shadow: 0 0 12px var(--neon-orange);
+      opacity: 0;
+      transition: all 0.4s ease;
+      cursor: none;
+      box-shadow: 0 0 35px var(--neon-orange);
+      z-index: 15;
+    }
+
+    .wiring-nexus.active {
+      opacity: 1;
+      transform: scale(1.03);
+    }
+
+    /* CREWMATE CURSOR - 2X IDLE SCALE */
+    .crewmate-cursor {
+      position: fixed;
+      width: 70px;
+      height: 70px;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.12s ease-out;
+      filter: drop-shadow(0 0 10px var(--neon-blue));
+      image-rendering: pixelated;
+    }
+
+    .crewmate-cursor.idle {
+      width: 140px !important;
+      height: 140px !important;
+      filter: drop-shadow(0 0 15px var(--neon-blue)) drop-shadow(0 0 30px var(--neon-green));
+    }
+
+    .crewmate-cursor img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      image-rendering: pixelated;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .holo-podium {
+        width: 95vw;
+        height: 80vh;
+        padding: 30px 20px 60px;
+      }
+      
+      .crew-hologram {
+        font-size: 3rem;
+      }
+      
+      .mission-directive {
+        font-size: 1.2rem;
+      }
+      
+      .activation-console {
+        font-size: 1.4rem;
+        padding: 15px 30px;
+        bottom: 20px;
+      }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <div class="crew-chamber"></div>
+  <div class="chamber-nebula"></div>
+
+  <div class="holo-podium">
+    <div class="podium-scan"></div>
+    
+    <div class="crew-hologram" data-text="Your Name">Your Name</div>
+    <div class="mission-directive">
+      CREWMATE CODER<br>
+      TASK: MASTER COSMIC CODE<br>
+      STATUS: SYSTEMS OPTIMAL
+    </div>
+    
+    <button class="activation-console" id="missionBtn">
+      ACTIVATE PORTFOLIO
+    </button>
+  </div>
+
+  <div class="task-hologram" id="taskHologram">
+    TASK UPDATE<br>
+    PROGRESS: 85%
+  </div>
+
+  <div class="vent-portal" id="vent"></div>
+  <div class="wiring-nexus" id="wiringNexus">WIRE NEXUS</div>
+
+  <canvas id="three-canvas"></canvas>
+  <canvas id="particle-canvas"></canvas>
+  
+  <div class="crewmate-cursor" id="cursor">
+    <img src="crewr.gif" alt="Crewmate" id="cursorImg" />
+  </div>
+
+  <script>
+    // CURSOR SYSTEM WITH 2X IDLE SCALE
+    class CrewmateCursor {
+      constructor() {
+        this.cursor = document.getElementById('cursor');
+        this.cursorImg = document.getElementById('cursorImg');
+        this.missionBtn = document.getElementById('missionBtn');
+        
+        this.state = {
+          x: 0, y: 0,
+          lastX: 0, lastY: 0,
+          isHovering: false,
+          isPressed: false,
+          isIdle: false,
+          currentGif: 'crewr.gif',
+          idleTimer: null,
+          stepCount: 0,
+          direction: 'right'
+        };
+
+        this.init();
+      }
+
+      init() {
+        this.bindEvents();
+        this.setIdleTimer();
+      }
+
+      bindEvents() {
+        document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+        document.addEventListener('mousedown', () => this.handleMouseDown());
+        document.addEventListener('mouseup', () => this.handleMouseUp());
+
+        const interactives = ['missionBtn', 'vent', 'wiringNexus'];
+        interactives.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.addEventListener('mouseenter', () => {
+              this.state.isHovering = true;
+              this.state.isIdle = false;
+              this.clearIdleTimer();
+              this.setGif('crewr.gif');
+              this.updateCursor();
+            });
+            el.addEventListener('mouseleave', () => {
+              this.state.isHovering = false;
+              this.setIdleTimer();
+            });
+          }
+        });
+      }
+
+      handleMouseMove(e) {
+        this.state.x = e.clientX;
+        this.state.y = e.clientY;
+        
+        this.cursor.style.left = `${this.state.x}px`;
+        this.cursor.style.top = `${this.state.y}px`;
+
+        const distance = this.getDistance(this.state.lastX, this.state.lastY, this.state.x, this.state.y);
+        
+        if (distance > 2) {
+          this.updateDirection();
+          this.handleMovement();
+          this.state.stepCount++;
+          
+          if (this.state.stepCount % 3 === 0) {
+            this.createFootprint();
+          }
+        }
+
+        this.state.lastX = this.state.x;
+        this.state.lastY = this.state.y;
+        this.setIdleTimer();
+      }
+
+      handleMouseDown() {
+        this.state.isPressed = true;
+        this.state.isIdle = false;
+        this.clearIdleTimer();
+        this.setGif('bp.gif', 3000);
+        this.updateCursor();
+      }
+
+      handleMouseUp() {
+        this.state.isPressed = false;
+        if (!this.state.isHovering) {
+          this.setGif('crewr.gif');
+        }
+        this.updateCursor();
+        this.setIdleTimer();
+      }
+
+      updateDirection() {
+        const dx = this.state.x - this.state.lastX;
+        const dy = this.state.y - this.state.lastY;
+        
+        if (Math.abs(dx) > Math.abs(dy)) {
+          this.state.direction = dx > 0 ? 'right' : 'left';
+        } else {
+          this.state.direction = dy > 0 ? 'down' : 'up';
+        }
+      }
+
+      updateCursor() {
+        let scale = this.state.isIdle ? 2 : 1; // 2X IDLE SCALE
+        
+        if (this.state.isHovering) {
+          scale = 1.4;
+        } else if (this.state.isPressed) {
+          scale = 0.9;
+        }
+
+        let rotation = '';
+        switch(this.state.direction) {
+          case 'left': rotation = 'rotateY(180deg)'; break;
+          case 'up': rotation = 'rotate(-90deg)'; break;
+          case 'down': rotation = 'rotate(90deg)'; break;
+        }
+
+        if (this.state.isIdle) {
+          this.cursor.classList.add('idle');
+        } else {
+          this.cursor.classList.remove('idle');
+        }
+
+        this.cursor.style.transform = `translate(-50%, -50%) scale(${scale}) ${rotation}`;
+      }
+
+      setGif(gifName, duration = 0) {
+        if (this.state.currentGif !== gifName) {
+          this.state.currentGif = gifName;
+          this.cursorImg.src = gifName;
+          
+          if (duration > 0 && gifName === 'bp.gif') {
+            setTimeout(() => {
+              if (this.state.currentGif === 'bp.gif') {
+                this.setGif('crewr.gif');
+              }
+            }, duration);
+          }
+        }
+      }
+
+      handleMovement() {
+        if (this.state.isIdle) {
+          this.state.isIdle = false;
+          this.cursor.classList.remove('idle');
+          this.setGif('crewr.gif');
+        }
+        
+        if (!this.state.isPressed && !this.state.isHovering) {
+          this.setGif('crewr.gif');
+        }
+        
+        this.updateCursor();
+      }
+
+      createFootprint() {
+        const foot = document.createElement('div');
+        foot.style.cssText = `
+          position: fixed;
+          width: 18px;
+          height: 11px;
+          background: radial-gradient(circle, rgba(0,212,255,0.6), transparent);
+          border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+          transform: rotate(15deg);
+          z-index: 1;
+          pointer-events: none;
+          left: ${this.state.x - 9}px;
+          top: ${this.state.y + 35}px;
+          animation: footprintFade 1s ease-out forwards;
+        `;
+        document.body.appendChild(foot);
+        setTimeout(() => foot.remove(), 1000);
+      }
+
+      setIdleTimer() {
+        this.clearIdleTimer();
+        this.state.idleTimer = setTimeout(() => {
+          if (!this.state.isPressed && !this.state.isHovering) {
+            this.state.isIdle = true;
+            this.setGif('crew.gif');
+            this.updateCursor();
+          }
+        }, 2000);
+      }
+
+      clearIdleTimer() {
+        if (this.state.idleTimer) {
+          clearTimeout(this.state.idleTimer);
+          this.state.idleTimer = null;
+        }
+      }
+
+      getDistance(x1, y1, x2, y2) {
+        return Math.sqrt((x2-x1)**2 + (y2-y1)**2);
+      }
+    }
+
+    const crewmateCursor = new CrewmateCursor();
+
+    // MISSION BUTTON WITH 3 SECOND ANIMATION
+    const missionBtn = document.getElementById('missionBtn');
+    missionBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      missionBtn.disabled = true;
+      missionBtn.style.pointerEvents = 'none';
+      
+      missionBtn.textContent = 'ACTIVATING...';
+      playSound('https://www.soundjay.com/misc/sounds/beep-28.wav');
+      
+      crewmateCursor.setGif('bp.gif', 3000);
+      
+      gsap.to(missionBtn, {
+        scale: 1.1,
+        y: -10,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+
+      setTimeout(() => {
+        gsap.to(missionBtn, {
+          scale: 0,
+          opacity: 0,
+          duration: 0.5,
+          ease: 'power2.in'
+        });
+        
+        setTimeout(() => {
+          window.location.href = 'portfolio.html';
+        }, 500);
+      }, 3000);
+    });
+
+    // INTERACTIVE TASKS
+    let clickCount = 0;
+    const tasks = ['SCAN SYSTEMS', 'ALIGN ENGINES', 'STABILIZE REACTOR', 'UPDATE LOGS', 'PURGE VENTS'];
+
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.activation-console') || e.target.closest('.vent-portal') || e.target.closest('.wiring-nexus')) return;
+      
+      clickCount++;
+      const hologram = document.getElementById('taskHologram');
+      const vent = document.getElementById('vent');
+      const nexus = document.getElementById('wiringNexus');
+      
+      const randomTask = tasks[Math.floor(Math.random() * tasks.length)];
+      const progress = Math.floor(Math.random() * 30 + 70);
+      
+      hologram.innerHTML = `${randomTask}<br>PROGRESS: ${progress}%`;
+      hologram.classList.add('active');
+      
+      if (clickCount % 2 === 0) vent.classList.add('active');
+      if (clickCount % 3 === 0) nexus.classList.add('active');
+      
+      setTimeout(() => {
+        hologram.classList.remove('active');
+        vent.classList.remove('active');
+        nexus.classList.remove('active');
+      }, 3000);
+    });
+
+    function playSound(url) {
+      try {
+        const audio = new Audio(url);
+        audio.volume = 0.3;
+        audio.play().catch(() => {});
+      } catch(e) {}
+    }
+
+    // ADD YOUR THREE.JS AND PARTICLE CODE HERE AS BEFORE
+
+    console.log('🌌 INTERSTELLAR CREW CHAMBER ACTIVATED!');
+    console.log('✅ IDLE CURSOR: 2X SCALE');
+    console.log('✅ NOVEL UI: HOLO-PODIUM DESIGN');
+  </script>
+</body>
+</html>

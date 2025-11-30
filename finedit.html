@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="nav-logo">Your Name</a>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Your Name</h1>
+                <p>Computer Science Student | Aspiring Software Developer</p>
+                <a href="#about" class="hero-cta">Learn More About Me</a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                            <div class="profile-img">
+                                <img src="your-image.jpeg" alt="Profile Image" style="width: 70%;height:60%;border-radius: 60%;">
+                            </div>
+                    </div>
+
+                    <div class="about-text">
+                        <h3>Passionate Computer Science Student</h3>
+                        <p>I am a dedicated Computer Science student with a strong foundation in programming and software development. My academic journey has equipped me with comprehensive knowledge in algorithms, data structures, and modern programming languages.</p>
+                        <p>I am passionate about leveraging technology to solve real-world problems and creating innovative solutions that make a positive impact. My goal is to contribute to the tech industry through meaningful projects and continuous learning.</p>
+                        <p>Currently seeking internship opportunities and entry-level positions where I can apply my technical skills and grow as a professional developer.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section">
+            <div class="container">
+                <h2 class="section-title">Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2022 - 2026</div>
+                            <h3 class="timeline-title">Bachelor of Science in Computer Science</h3>
+                            <p class="timeline-desc">University Name - Currently pursuing undergraduate degree with focus on software engineering, algorithms, and data structures. Maintaining strong academic performance with active participation in coding competitions and technical clubs.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2020 - 2022</div>
+                            <h3 class="timeline-title">Higher Secondary Education</h3>
+                            <p class="timeline-desc">School Name - Completed 12th grade with Mathematics, Physics, and Chemistry. Developed strong analytical and problem-solving foundation that supports my current computer science studies.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2018 - 2020</div>
+                            <h3 class="timeline-title">Secondary Education</h3>
+                            <p class="timeline-desc">School Name - Completed 10th grade with distinction. First exposure to programming through computer science classes, which sparked my passion for technology and software development.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+         <section id="achievements" class="section">
+            <div class="trophy-rack-container">
+        <!-- Glass Overlay -->
+        <div class="glass-overlay" id="glassOverlay"></div>
+        
+        <div class="rack-header">
+            <h1 class="rack-title">Achievement Gallery</h1>
+            <p class="rack-subtitle">A showcase of excellence and dedication</p>
+        </div>
+
+        <div class="trophy-grid" id="trophyGrid">
+            <!-- Trophies will be generated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Tooltip Overlay -->
+    <div class="overlay-backdrop" id="overlayBackdrop"></div>
+    <div class="tooltip-overlay" id="tooltipOverlay">
+        <div class="tooltip-header">
+            <h3 class="tooltip-title" id="tooltipTitle"></h3>
+            <button class="close-btn" id="closeBtn">&times;</button>
+        </div>
+        <div class="gallery-container">
+            <img class="gallery-image active" id="galleryImage1" alt="Achievement Image 1">
+            <img class="gallery-image" id="galleryImage2" alt="Achievement Image 2">
+            <img class="gallery-image" id="galleryImage3" alt="Achievement Image 3">
+            <button class="gallery-controls prev-btn" id="prevBtn">‹</button>
+            <button class="gallery-controls next-btn" id="nextBtn">›</button>
+        </div>
+        <div class="gallery-indicators">
+            <span class="indicator active" data-index="0"></span>
+            <span class="indicator" data-index="1"></span>
+            <span class="indicator" data-index="2"></span>
+        </div>
+        <div class="tooltip-content" id="tooltipContent"></div>
+    </div>
+
+    <script>
+        // Trophy data
+        const trophyData = [
+            {
+                icon: '🏆',
+                name: 'Innovation Excellence',
+                category: 'Technology Leadership',
+                images: [
+                    'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=300&fit=crop',
+                    'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
+                    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop'
+                ],
+                description: 'Awarded for groundbreaking innovations in technology solutions that transformed industry standards. This recognition celebrates the development of cutting-edge algorithms and user-centric design approaches that significantly improved operational efficiency across multiple sectors. The achievement represents months of dedicated research, collaborative teamwork, and unwavering commitment to excellence in pushing the boundaries of what\'s possible in modern technology applications.'
+            },
+            {
+                icon: '🥇',
+                name: 'Leadership Champion',
+                category: 'Management Excellence',
+                images: [
+                    'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop',
+                    'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&h=300&fit=crop',
+                    'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=400&h=300&fit=crop'
+                ],
+                description: 'Recognized for exemplary leadership qualities and the ability to inspire teams toward achieving extraordinary results. This award acknowledges successful project management across complex initiatives, fostering collaborative environments, and mentoring emerging talent. The recognition highlights consistent demonstration of strategic thinking, effective communication, and the rare ability to navigate challenging situations while maintaining team morale and delivering exceptional outcomes.'
+            },
+            {
+                icon: '🌟',
+                name: 'Creative Visionary',
+                category: 'Design Innovation',
+                images: [
+                    'https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=300&fit=crop',
+                    'https://images.unsplash.com/photo-1559028006-448665bd7c7f?w=400&h=300&fit=crop',
+                    'https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=400&h=300&fit=crop'
+                ],
+                description: 'Honored for revolutionary creative approaches that redefined visual storytelling and user experience design. This achievement celebrates the perfect blend of artistic vision and practical functionality, resulting in designs that not only captivate audiences but also solve real-world problems. The award recognizes innovative thinking, attention to detail, and the ability to translate complex concepts into accessible, beautiful, and highly functional design solutions.'
+            },
+            {
+                icon: '🚀',
+                name: 'Growth Accelerator',
+                category: 'Business Development',
+                images: [
+                    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+                    'https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=400&h=300&fit=crop',
+                    'https://images.unsplash.com/photo-1515378791036-0648a814c963?w=400&h=300&fit=crop'
+                ],
+                description: 'Awarded for exceptional contributions to organizational growth and market expansion strategies. This recognition celebrates the successful implementation of initiatives that resulted in significant revenue increases, market share growth, and enhanced competitive positioning. The achievement represents strategic thinking, market analysis expertise, and the ability to identify and capitalize on emerging opportunities while building sustainable business relationships.'
+            },
+            {
+                icon: '💎',
+                name: 'Quality Excellence',
+                category: 'Operational Standards',
+                images: [
+                    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+                    'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop',
+                    'https://images.unsplash.com/photo-1556745757-8d76bdb6984b?w=400&h=300&fit=crop'
+                ],
+                description: 'Recognized for unwavering commitment to quality standards and continuous improvement processes. This honor celebrates the implementation of rigorous quality control measures, process optimization, and maintaining excellence across all deliverables. The achievement reflects dedication to detail, systematic approach to problem-solving, and the ability to establish and maintain high standards that exceed industry benchmarks and client expectations.'
+            },
+            {
+                icon: '🎯',
+                name: 'Strategic Impact',
+                category: 'Business Strategy',
+                images: [
+                    'https://images.unsplash.com/photo-1553028826-f4804a6dba3b?w=400&h=300&fit=crop',
+                    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop',
+                    'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=400&h=300&fit=crop'
+                ],
+                description: 'Awarded for exceptional strategic planning and execution that delivered measurable business impact. This recognition highlights the ability to analyze complex market conditions, develop comprehensive strategies, and execute plans that achieve significant organizational objectives. The achievement represents analytical thinking, stakeholder management, and the rare ability to balance short-term goals with long-term vision while adapting to changing business environments.'
+            }
+        ];
+
+        // State management
+        let glassShattered = false;
+        let currentGalleryIndex = 0;
+        let currentTrophyData = null;
+
+        // Initialize the application
+        function init() {
+            renderTrophies();
+            setupEventListeners();
+        }
+
+        // Render trophy cards
+        function renderTrophies() {
+            const trophyGrid = document.getElementById('trophyGrid');
+            trophyGrid.innerHTML = '';
+
+            trophyData.forEach((trophy, index) => {
+                const trophyCard = document.createElement('div');
+                trophyCard.className = 'trophy-card';
+                trophyCard.innerHTML = `
+                    <span class="trophy-icon">${trophy.icon}</span>
+                    <h3 class="trophy-name">${trophy.name}</h3>
+                    <p class="trophy-category">${trophy.category}</p>
+                `;
+                trophyCard.addEventListener('click', () => showTooltip(trophy));
+                trophyGrid.appendChild(trophyCard);
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            const glassOverlay = document.getElementById('glassOverlay');
+            const overlayBackdrop = document.getElementById('overlayBackdrop');
+            const closeBtn = document.getElementById('closeBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            // Glass breaking effect
+            glassOverlay.addEventListener('click', handleGlassBreak);
+
+            // Tooltip controls
+            overlayBackdrop.addEventListener('click', hideTooltip);
+            closeBtn.addEventListener('click', hideTooltip);
+            prevBtn.addEventListener('click', previousImage);
+            nextBtn.addEventListener('click', nextImage);
+
+            // Gallery indicators
+            document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                indicator.addEventListener('click', () => goToImage(index));
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', handleKeypress);
+        }
+
+        // Handle glass breaking animation
+        function handleGlassBreak(e) {
+            e.stopPropagation();
+            if (glassShattered) return;
+
+            const glassOverlay = document.getElementById('glassOverlay');
+            glassOverlay.classList.add('breaking');
+            glassShattered = true;
+
+            setTimeout(() => {
+                glassOverlay.classList.add('hidden');
+            }, 800);
+        }
+
+        // Show tooltip with trophy details
+        function showTooltip(trophy) {
+            if (!glassShattered) return;
+
+            currentTrophyData = trophy;
+            currentGalleryIndex = 0;
+
+            const tooltipOverlay = document.getElementById('tooltipOverlay');
+            const overlayBackdrop = document.getElementById('overlayBackdrop');
+            const tooltipTitle = document.getElementById('tooltipTitle');
+            const tooltipContent = document.getElementById('tooltipContent');
+
+            tooltipTitle.textContent = trophy.name;
+            tooltipContent.textContent = trophy.description;
+
+            // Load images
+            trophy.images.forEach((src, index) => {
+                const img = document.getElementById(`galleryImage${index + 1}`);
+                img.src = src;
+            });
+
+            updateGalleryDisplay();
+            
+            overlayBackdrop.classList.add('active');
+            tooltipOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Hide tooltip
+        function hideTooltip() {
+            const tooltipOverlay = document.getElementById('tooltipOverlay');
+            const overlayBackdrop = document.getElementById('overlayBackdrop');
+
+            overlayBackdrop.classList.remove('active');
+            tooltipOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Gallery navigation
+        function previousImage() {
+            if (!currentTrophyData) return;
+            currentGalleryIndex = (currentGalleryIndex - 1 + 3) % 3;
+            updateGalleryDisplay();
+        }
+
+        function nextImage() {
+            if (!currentTrophyData) return;
+            currentGalleryIndex = (currentGalleryIndex + 1) % 3;
+            updateGalleryDisplay();
+        }
+
+        function goToImage(index) {
+            currentGalleryIndex = index;
+            updateGalleryDisplay();
+        }
+
+        // Update gallery display
+        function updateGalleryDisplay() {
+            // Update images
+            document.querySelectorAll('.gallery-image').forEach((img, index) => {
+                img.classList.toggle('active', index === currentGalleryIndex);
+            });
+
+            // Update indicators
+            document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentGalleryIndex);
+            });
+        }
+
+        // Keyboard navigation
+        function handleKeypress(e) {
+            if (!document.getElementById('tooltipOverlay').classList.contains('active')) return;
+
+            switch (e.key) {
+                case 'Escape':
+                    hideTooltip();
+                    break;
+                case 'ArrowLeft':
+                    previousImage();
+                    break;
+                case 'ArrowRight':
+                    nextImage();
+                    break;
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+        </section>
+
+        <!-- Internships Section -->
+        <section id="internships" class="section">
+            <div class="container">
+                <h2 class="section-title">Internship Experience</h2>
+                <div class="internship-timeline">
+                    <div class="internship-item">
+                        <div class="internship-content">
+                            <div class="internship-header">
+                                <h3 class="internship-title">Software Development Intern</h3>
+                                <span class="internship-company">Tech Solutions Inc.</span>
+                            </div>
+                            <div class="internship-date">Summer 2024 (3 months)</div>
+                            <div class="internship-desc">
+                                <p>Developed and maintained web applications using React and Node.js. Collaborated with senior developers on feature implementation and bug fixes. Gained hands-on experience with agile development methodologies and version control systems.</p>
+                                <div class="internship-skills">
+                                    <span class="skill-tag">React</span>
+                                    <span class="skill-tag">Node.js</span>
+                                    <span class="skill-tag">JavaScript</span>
+                                    <span class="skill-tag">Git</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="internship-item">
+                        <div class="internship-content">
+                            <div class="internship-header">
+                                <h3 class="internship-title">Backend Developer Intern</h3>
+                                <span class="internship-company">DataCorp Systems</span>
+                            </div>
+                            <div class="internship-date">Winter 2023 (2 months)</div>
+                            <div class="internship-desc">
+                                <p>Worked on database optimization and API development. Implemented data processing pipelines and contributed to improving system performance by 25%. Learned about scalable architecture design and cloud deployment.</p>
+                                <div class="internship-skills">
+                                    <span class="skill-tag">Python</span>
+                                    <span class="skill-tag">PostgreSQL</span>
+                                    <span class="skill-tag">REST APIs</span>
+                                    <span class="skill-tag">AWS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Languages Section -->
+        <section id="languages" class="section">
+            <div class="container">
+                <h2 class="section-title">Languages</h2>
+                <div class="languages-grid">
+                    <div class="language-card">
+                        <div class="language-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <div class="language-info">
+                            <h3 class="language-name">English</h3>
+                            <div class="language-level">
+                                <span class="level-text">Fluent</span>
+                                <div class="level-bar">
+                                    <div class="level-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="language-card">
+                        <div class="language-icon">
+                            <i class="fas fa-om"></i>
+                        </div>
+                        <div class="language-info">
+                            <h3 class="language-name">Hindi</h3>
+                            <div class="language-level">
+                                <span class="level-text">Native</span>
+                                <div class="level-bar">
+                                    <div class="level-progress" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="language-card">
+                        <div class="language-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div class="language-info">
+                            <h3 class="language-name">Tamil</h3>
+                            <div class="language-level">
+                                <span class="level-text">Native</span>
+                                <div class="level-bar">
+                                    <div class="level-progress" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="language-card">
+                        <div class="language-icon">
+                            <i class="fas fa-globe-asia"></i>
+                        </div>
+                        <div class="language-info">
+                            <h3 class="language-name">Spanish</h3>
+                            <div class="language-level">
+                                <span class="level-text">Intermediate</span>
+                                <div class="level-bar">
+                                    <div class="level-progress" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="skill-icon"><i class="fas fa-code"></i></div>
+                        <h3>Programming Languages</h3>
+                        <div class="skill-list">Python, Java, C++, JavaScript, HTML, CSS</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-icon"><i class="fas fa-globe"></i></div>
+                        <h3>Web Development</h3>
+                        <div class="skill-list">React, Node.js, Express.js, MongoDB, REST APIs</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-icon"><i class="fas fa-database"></i></div>
+                        <h3>Database Management</h3>
+                        <div class="skill-list">MySQL, PostgreSQL, MongoDB, Database Design</div>
+                    </div>
+                    <div class="skill-category">
+                        <div class="skill-icon"><i class="fas fa-tools"></i></div>
+                        <h3>Tools & Technologies</h3>
+                        <div class="skill-list">Git, GitHub, Docker, Linux, VS Code, IntelliJ</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <h2 class="section-title">Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">E-Commerce Platform</h3>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-desc">Full-stack e-commerce web application with user authentication, shopping cart functionality, payment processing, and admin dashboard. Implemented secure user registration and product management system.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">MongoDB</span>
+                                <span class="tech-tag">Express.js</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">Task Management System</h3>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-desc">Collaborative task management application with real-time updates, team collaboration features, and project tracking capabilities. Includes user roles and permission management.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Django</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                                <span class="tech-tag">JavaScript</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3 class="project-title">Data Analytics Dashboard</h3>
+                        </div>
+                        <div class="project-body">
+                            <p class="project-desc">Interactive data visualization dashboard for analyzing business metrics with dynamic charts, filtering capabilities, and export functionality. Processes large datasets efficiently.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">Plotly</span>
+                                <span class="tech-tag">Streamlit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-content">
+                    <p class="contact-text">I'm always interested in new opportunities and collaborations. Feel free to reach out if you'd like to discuss potential projects, internships, or just connect!</p>
+                    <div class="contact-icons">
+                        <a href="mailto:your.email@example.com" class="contact-icon" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/yourprofile" class="contact-icon" title="LinkedIn" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/yourusername" class="contact-icon" title="GitHub" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="tel:+1234567890" class="contact-icon" title="Phone">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Your Name. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+
+    <!-- From Uiverse.io by 00Kubi --> 
+    <label class="theme-switch"  >
+    <input class="theme-switch__checkbox" type="checkbox" id="themeToggle" title="Toggle Dark/Light Mode">
+    <div class="theme-switch__container">
+        <div class="theme-switch__clouds"></div>
+        <div class="theme-switch__stars-container">
+        <svg fill="none" viewBox="0 0 144 55" xmlns="http://www.w3.org/2000/svg">
+            <path
+            fill="currentColor"
+            d="M135.831 3.00688C135.055 3.85027 134.111 4.29946 133 4.35447C134.111 4.40947 135.055 4.85867 135.831 5.71123C136.607 6.55462 136.996 7.56303 136.996 8.72727C136.996 7.95722 137.172 7.25134 137.525 6.59129C137.886 5.93124 138.372 5.39954 138.98 5.00535C139.598 4.60199 140.268 4.39114 141 4.35447C139.88 4.2903 138.936 3.85027 138.16 3.00688C137.384 2.16348 136.996 1.16425 136.996 0C136.996 1.16425 136.607 2.16348 135.831 3.00688ZM31 23.3545C32.1114 23.2995 33.0551 22.8503 33.8313 22.0069C34.6075 21.1635 34.9956 20.1642 34.9956 19C34.9956 20.1642 35.3837 21.1635 36.1599 22.0069C36.9361 22.8503 37.8798 23.2903 39 23.3545C38.2679 23.3911 37.5976 23.602 36.9802 24.0053C36.3716 24.3995 35.8864 24.9312 35.5248 25.5913C35.172 26.2513 34.9956 26.9572 34.9956 27.7273C34.9956 26.563 34.6075 25.5546 33.8313 24.7112C33.0551 23.8587 32.1114 23.4095 31 23.3545ZM0 36.3545C1.11136 36.2995 2.05513 35.8503 2.83131 35.0069C3.6075 34.1635 3.99559 33.1642 3.99559 32C3.99559 33.1642 4.38368 34.1635 5.15987 35.0069C5.93605 35.8503 6.87982 36.2903 8 36.3545C7.26792 36.3911 6.59757 36.602 5.98015 37.0053C5.37155 37.3995 4.88644 37.9312 4.52481 38.5913C4.172 39.2513 3.99559 39.9572 3.99559 40.7273C3.99559 39.563 3.6075 38.5546 2.83131 37.7112C2.05513 36.8587 1.11136 36.4095 0 36.3545ZM56.8313 24.0069C56.0551 24.8503 55.1114 25.2995 54 25.3545C55.1114 25.4095 56.0551 25.8587 56.8313 26.7112C57.6075 27.5546 57.9956 28.563 57.9956 29.7273C57.9956 28.9572 58.172 28.2513 58.5248 27.5913C58.8864 26.9312 59.3716 26.3995 59.9802 26.0053C60.5976 25.602 61.2679 25.3911 62 25.3545C60.8798 25.2903 59.9361 24.8503 59.1599 24.0069C58.3837 23.1635 57.9956 22.1642 57.9956 21C57.9956 22.1642 57.6075 23.1635 56.8313 24.0069ZM81 25.3545C82.1114 25.2995 83.0551 24.8503 83.8313 24.0069C84.6075 23.1635 84.9956 22.1642 84.9956 21C84.9956 22.1642 85.3837 23.1635 86.1599 24.0069C86.9361 24.8503 87.8798 25.2903 89 25.3545C88.2679 25.3911 87.5976 25.602 86.9802 26.0053C86.3716 26.3995 85.8864 26.9312 85.5248 27.5913C85.172 28.2513 84.9956 28.9572 84.9956 29.7273C84.9956 28.563 84.6075 27.5546 83.8313 26.7112C83.0551 25.8587 82.1114 25.4095 81 25.3545ZM136 36.3545C137.111 36.2995 138.055 35.8503 138.831 35.0069C139.607 34.1635 139.996 33.1642 139.996 32C139.996 33.1642 140.384 34.1635 141.16 35.0069C141.936 35.8503 142.88 36.2903 144 36.3545C143.268 36.3911 142.598 36.602 141.98 37.0053C141.372 37.3995 140.886 37.9312 140.525 38.5913C140.172 39.2513 139.996 39.9572 139.996 40.7273C139.996 39.563 139.607 38.5546 138.831 37.7112C138.055 36.8587 137.111 36.4095 136 36.3545ZM101.831 49.0069C101.055 49.8503 100.111 50.2995 99 50.3545C100.111 50.4095 101.055 50.8587 101.831 51.7112C102.607 52.5546 102.996 53.563 102.996 54.7273C102.996 53.9572 103.172 53.2513 103.525 52.5913C103.886 51.9312 104.372 51.3995 104.98 51.0053C105.598 50.602 106.268 50.3911 107 50.3545C105.88 50.2903 104.936 49.8503 104.16 49.0069C103.384 48.1635 102.996 47.1642 102.996 46C102.996 47.1642 102.607 48.1635 101.831 49.0069Z"
+            clip-rule="evenodd"
+            fill-rule="evenodd"
+            ></path>
+        </svg>
+        </div>
+        <div class="theme-switch__circle-container">
+        <div class="theme-switch__sun-moon-container">
+            <div class="theme-switch__moon">
+            <div class="theme-switch__spot"></div>
+            <div class="theme-switch__spot"></div>
+            <div class="theme-switch__spot"></div>
+            </div>
+        </div>
+        </div>
+        <div class="theme-switch__shooting-star"></div>
+        <div class="theme-switch__shooting-star-2"></div>
+        <div class="theme-switch__meteor"></div>
+        <div class="theme-switch__stars-cluster">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        </div>
+        <div class="theme-switch__aurora"></div>
+        <div class="theme-switch__comets">
+        <div class="comet"></div>
+        <div class="comet"></div>
+        </div>
+    </div>
+    </label>
+
+    <!-- Back to Top Button -->
+    <a href="#home" class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <script>
+        // Back to top button functionality
+        window.addEventListener('scroll', function() {
+            const backToTop = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active navigation link highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        document.addEventListener("DOMContentLoaded", () => {
+        const checkbox = document.querySelector(".theme-switch__checkbox");
+
+        const savedTheme = localStorage.getItem("theme") || "light";
+
+        // Remove both classes first
+        document.body.classList.remove("light-mode", "dark-mode");
+
+        // Apply your own CSS class names based on saved theme
+        if (savedTheme === "dark") {
+            document.body.classList.add("dark-mode");
+            checkbox.checked = true;
+        } else {
+            document.body.classList.add("light-mode");
+            checkbox.checked = false;
+        }
+
+        // Toggle handler
+        checkbox.addEventListener("change", () => {
+            if (checkbox.checked) {
+            document.body.classList.remove("light-mode");
+            document.body.classList.add("dark-mode");
+            localStorage.setItem("theme", "dark");
+            } else {
+            document.body.classList.remove("dark-mode");
+            document.body.classList.add("light-mode");
+            localStorage.setItem("theme", "light");
+            }
+        });
+        });
+
+
+
+    </script>
+</body>
+</html>
